@@ -1,4 +1,6 @@
 // Three different ways to update state
+//  Read this: https://react.dev/reference/react/useState#setstate
+// Important for understanding rerendering of components
 
 import { useState } from 'react';
 
