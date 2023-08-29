@@ -1,7 +1,11 @@
+// State is data changing over time
+
+import { Counter } from './Counter';
+
 function App() {
   return (
     <>
-      <h1>Hello World</h1>
+      <Counter />
     </>
   );
 }
