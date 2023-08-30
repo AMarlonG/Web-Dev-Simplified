@@ -49,15 +49,15 @@ export function ArrayStates() {
     });
   }
 
-  function addInputToStart() {
-    setArray((prevArray) => {
-      return [input, ...prevArray];
-    });
-  }
-
   function addLetterKAtIndexThree(letter, index) {
     setArray((prevArray) => {
       return [...prevArray.slice(0, index), letter, ...prevArray.slice(index)];
+    });
+  }
+
+  function addInputToStart() {
+    setArray((prevArray) => {
+      return [input, ...prevArray];
     });
   }
 
