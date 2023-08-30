@@ -1,7 +1,9 @@
+import { ArrayStates } from './ArrayStates';
+
 function App() {
   return (
     <>
-      <h1>Hello World</h1>
+      <ArrayStates />
     </>
   );
 }
