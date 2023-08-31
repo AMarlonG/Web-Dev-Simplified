@@ -6,7 +6,7 @@ export function CounterWithName() {
 
   // This allows for changes (side effects) based on a change in states of this component
   useEffect(() => {
-    console.log('useEffect called and age is', age);
+    console.log('useEffect called, and age is now', age);
   }, [age]);
   // age inside of the array at the end is the dependency array
   // It means this useEffect will only run if, and every time, the age state changes
