@@ -57,7 +57,7 @@ export function ArrayStates() {
 
   function addInputToStart() {
     setArray((prevArray) => {
-      return [input, ...prevArray];
+      return [input, ...prevArray, setInput('')];
     });
   }
 
