@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { Users } from './Users.jsx';
 
 function App() {
-  const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -25,11 +25,11 @@ function App() {
     <>
       <h1>Users List</h1>
       {isLoading ? (
-        <h2>Loading...</h2>
+        <h2>Loading ...</h2>
       ) : (
         <ul>
           {users.map((user) => {
-            return <Users name={user.name} key={user.id} />;
+            return <Users key={user.id} name={user.name} />;
           })}
         </ul>
       )}
