@@ -7,6 +7,8 @@ function App() {
 
   useEffect(() => {
     setIsLoading(true);
+    setUsers(undefined);
+
     const controller = new AbortController();
 
     fetch('https://jsonplaceholder.typicode.com/users', {
