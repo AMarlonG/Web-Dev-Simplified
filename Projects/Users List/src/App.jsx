@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
-import { Users } from './Users';
+import { useState, useEffect } from 'react';
+import { Users } from './Users.jsx';
 
-export function UsersList() {
+function App() {
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
-
+    setIsLoading(true);
     const controller = new AbortController();
 
     fetch('https://jsonplaceholder.typicode.com/users', {
@@ -15,15 +14,15 @@ export function UsersList() {
     })
       .then((response) => response.json())
       .then(setUsers)
-      .finally(() => setLoading(false));
+      .finally(() => setIsLoading(false));
 
     return () => controller.abort();
   }, []);
 
   return (
     <>
-      <h1>User List</h1>
-      {loading ? (
+      <h1>Users List</h1>
+      {isLoading ? (
         <h2>Loading...</h2>
       ) : (
         <ul>
@@ -35,3 +34,5 @@ export function UsersList() {
     </>
   );
 }
+
+export default App;
