@@ -1,9 +1,9 @@
-import { UserList } from './UserList';
+import { UsersList } from './UsersList';
 
 function App() {
   return (
     <>
-      <UserList />
+      <UsersList />
     </>
   );
 }
