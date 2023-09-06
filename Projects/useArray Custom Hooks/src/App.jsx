@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useArray } from './Hooks/useArray';
+
+const INITIAL_ARRAY = [1, 2, 3, 4, 5];
+// const INITIAL_ARRAY = () => [1, 2, 3, 4, 5]
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { array, set, push, replace, filter, remove, clear, reset } =
+    useArray(INITIAL_ARRAY);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <h1>{array.join(', ')}</h1>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '.5rem',
+          alignItems: 'flex-start',
+          marginTop: '1rem',
+        }}
+      >
+        <button onClick={() => set([4, 5, 6])}>
+          Set array elements to [4, 5, 6]
         </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+
+        <button onClick={() => push(4)}>Add 4 to the end</button>
+
+        <button onClick={() => replace(1, 9)}>
+          Replace the second element with 9
+        </button>
+
+        <button onClick={() => filter((numbers) => numbers < 3)}>
+          Keep all numbers less than 3
+        </button>
+
+        <button onClick={() => remove(0)}>Remove the first element</button>
+
+        <button onClick={clear}>Clear array</button>
+
+        <button onClick={reset}>Reset array</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
