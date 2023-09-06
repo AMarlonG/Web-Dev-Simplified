@@ -1,3 +1,5 @@
+import { useArray } from './Hooks/useArray';
+
 const INITIAL_ARRAY = [1, 2, 3, 4, 5];
 // const INITIAL_ARRAY = () => [1, 2, 3, 4, 5];
 
