@@ -1,3 +1,5 @@
+// This useLocalStorage hook is used to store values in the browsers local storage. and it works just like a useState hook
+
 import { useEffect, useState } from 'react';
 
 export function useLocalStorage(key, initialValue) {

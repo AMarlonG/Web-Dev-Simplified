@@ -1,5 +1,6 @@
 // useLocalStorage is used for simple data storage in the browser, such as a user's name or preferences, dark mode, todo list, input values, etc.
 // It is cleared when the browser cache is cleared, so it is not suitable for sensitive data or data that needs to be stored for a long time, such as authentication tokens.
+// useLocalStorage works just like useState.
 
 import { useLocalStorage } from './hooks/useLocalStorage';
 
