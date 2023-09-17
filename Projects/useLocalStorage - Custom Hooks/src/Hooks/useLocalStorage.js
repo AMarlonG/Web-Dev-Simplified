@@ -7,18 +7,22 @@ export function useLocalStorage(key, initialValue) {
     // Getting the input value from local storage
     const localStorageValue = localStorage.getItem(key);
 
-    if (localStorageValue == null) {
-      // If the initialValue is a function, we call it, which is the case for the last name input (see App.js)
-      if (typeof initialValue === 'function') {
-        return initialValue();
-        // If it is not a function, we return the value, which is the case for the first name input (see App.js)
-      } else {
-        return initialValue;
-      }
-    } else {
-      // Making localStorageValue a javascript value, and not just a JSON object
-      return JSON.parse(localStorageValue);
-    }
+    if (localStorageValue != null) return JSON.parse(localStorageValue);
+    if (typeof initialValue === 'function') return initialValue();
+    return initialValue;
+
+    // if (localStorageValue == null) {
+    //   // If the initialValue is a function, we call it, which is the case for the last name input (see App.js)
+    //   if (typeof initialValue === 'function') {
+    //     return initialValue();
+    //     // If it is not a function, we return the value, which is the case for the first name input (see App.js)
+    //   } else {
+    //     return initialValue;
+    //   }
+    // } else {
+    //   // Making localStorageValue a javascript value, and not just a JSON object
+    //   return JSON.parse(localStorageValue);
+    // }
   });
 
   useEffect(() => {
