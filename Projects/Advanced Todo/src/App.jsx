@@ -1,8 +1,9 @@
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import './styles.css';
-import { TodoItem } from './TodoItem';
 import { NewTodoForm } from './NewTodoForm';
 import { createContext } from 'react';
+import { TodoList } from './TodoList';
+import { TodoFilterForm } from './TodoFilterForm';
 
 // Creating a constant to hold the key for the local storage.
 const LOCAL_STORAGE_KEY = 'TODOS';
@@ -43,11 +44,20 @@ function reducer(todos, { type, payload }) {
 export const TodoContext = createContext();
 
 function App() {
+  const [filterName, setFilterName] = useState('');
+
+  const [hideCompletedFilter, setHideCompletedFilter] = useState(false);
+
   // Save todos to local storage with useState and useEffect
   const [todos, dispatch] = useReducer(reducer, [], (initialValue) => {
     const value = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (value == null) return initialValue;
     return JSON.parse(value);
+  });
+
+  const filteredTodos = todos.filter((todo) => {
+    if (hideCompletedFilter && todo.completed) return false;
+    return todo.name.includes(filterName);
   });
 
   useEffect(() => {
@@ -72,26 +82,21 @@ function App() {
 
       <TodoContext.Provider
         value={{
-          todos,
+          todos: filteredTodos,
           addNewTodo,
           toggleTodo,
           deleteTodo,
         }}
       >
-        <NewTodoForm />
+        <TodoFilterForm
+          name={filterName}
+          setName={setFilterName}
+          hideCompleted={hideCompletedFilter}
+          setHideCompleted={setHideCompletedFilter}
+        />
 
-        <ul id='list'>
-          {todos.map((todo) => {
-            return (
-              <TodoItem
-                key={todo.id}
-                {...todo}
-                toggleTodo={toggleTodo}
-                deleteTodo={deleteTodo}
-              />
-            );
-          })}
-        </ul>
+        <NewTodoForm />
+        <TodoList />
       </TodoContext.Provider>
     </>
   );
