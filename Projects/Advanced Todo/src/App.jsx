@@ -2,8 +2,12 @@ import { useEffect, useReducer } from 'react';
 import './styles.css';
 import { TodoItem } from './TodoItem';
 import { NewTodoForm } from './NewTodoForm';
+import { createContext } from 'react';
 
+// Creating a constant to hold the key for the local storage.
 const LOCAL_STORAGE_KEY = 'TODOS';
+
+// Creating an object to hold all the actions used in the reducer function.
 const ACTIONS = {
   ADD_TODO: 'add_todo',
   UPDATE_TODO: 'update_todo',
@@ -11,7 +15,7 @@ const ACTIONS = {
   DELETE_TODO: 'delete_todo',
 };
 
-// Create a reducer function that takes in two arguments, the first one is the current state, and the second one is the action that we want to perform on that state.
+// Creating a reducer function.
 function reducer(todos, { type, payload }) {
   if (type === 'add_todo') {
     return [
@@ -35,6 +39,8 @@ function reducer(todos, { type, payload }) {
 
   throw new Error(`Unhandled action type: ${type}.`);
 }
+
+export const TodoContext = createContext();
 
 function App() {
   // Save todos to local storage with useState and useEffect
@@ -64,20 +70,29 @@ function App() {
     <>
       <h1>Advanced Todo App</h1>
 
-      <NewTodoForm addNewTodo={addNewTodo} />
+      <TodoContext.Provider
+        value={{
+          todos,
+          addNewTodo,
+          toggleTodo,
+          deleteTodo,
+        }}
+      >
+        <NewTodoForm />
 
-      <ul id='list'>
-        {todos.map((todo) => {
-          return (
-            <TodoItem
-              key={todo.id}
-              {...todo}
-              toggleTodo={toggleTodo}
-              deleteTodo={deleteTodo}
-            />
-          );
-        })}
-      </ul>
+        <ul id='list'>
+          {todos.map((todo) => {
+            return (
+              <TodoItem
+                key={todo.id}
+                {...todo}
+                toggleTodo={toggleTodo}
+                deleteTodo={deleteTodo}
+              />
+            );
+          })}
+        </ul>
+      </TodoContext.Provider>
     </>
   );
 }
