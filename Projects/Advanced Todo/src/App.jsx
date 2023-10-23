@@ -38,6 +38,13 @@ function reducer(todos, { type, payload }) {
     return todos.filter((todo) => todo.id !== payload.id);
   }
 
+  if (type === 'update_todo') {
+    return todos.map((todo) => {
+      if (todo.id === payload.id) return { ...todo, name: payload.name };
+      return todo;
+    });
+  }
+
   throw new Error(`Unhandled action type: ${type}.`);
 }
 
@@ -72,6 +79,10 @@ function App() {
     dispatch({ type: ACTIONS.TOGGLE_TODO, payload: { id: todoId, completed } });
   }
 
+  function updateTodoName(todoId, name) {
+    dispatch({ type: ACTIONS.UPDATE_TODO, payload: { id: todoId, name } });
+  }
+
   function deleteTodo(todoId) {
     dispatch({ type: ACTIONS.DELETE_TODO, payload: { id: todoId } });
   }
@@ -85,6 +96,7 @@ function App() {
           todos: filteredTodos,
           addNewTodo,
           toggleTodo,
+          updateTodoName,
           deleteTodo,
         }}
       >
