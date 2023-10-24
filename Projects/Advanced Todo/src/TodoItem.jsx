@@ -1,3 +1,7 @@
+// This component creates a new todo item, and is responsible for rendering the todo item. The list of todo items is rendered in the TodoList component.
+// It also uses the useContext hook to get the toggleTodo, deleteTodo, and updateTodoName functions from the TodoContext, and creates the button handlers for the Edit and Delete buttons.
+// The edit button handler sets the isEditing state to true, which renders the form to edit the todo item.
+
 import { useContext, useState } from 'react';
 import { TodoContext } from './App';
 import { useRef } from 'react';

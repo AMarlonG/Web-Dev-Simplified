@@ -1,3 +1,9 @@
+// In this main app you find the following:
+// 1. Everything to do with local storage.
+// 2. The reducer function and its actions.
+// 3. The context provider.
+// 4. The states for the filter name and hide completed filter.
+
 import { useEffect, useReducer, useState } from 'react';
 import './styles.css';
 import { NewTodoForm } from './NewTodoForm';
@@ -52,7 +58,6 @@ export const TodoContext = createContext();
 
 function App() {
   const [filterName, setFilterName] = useState('');
-
   const [hideCompletedFilter, setHideCompletedFilter] = useState(false);
 
   // Save todos to local storage with useState and useEffect

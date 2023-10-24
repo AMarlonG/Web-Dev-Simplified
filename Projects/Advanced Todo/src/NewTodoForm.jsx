@@ -1,3 +1,7 @@
+// This component is responsible for rendering the form to add a new todo item.
+// It uses the useContext hook to get the addNewTodo function from the TodoContext.
+// It uses the useRef hook to get the value of the input field, and then clears the input field after the todo is added.
+
 import { useContext, useRef } from 'react';
 import { TodoContext } from './App';
 
